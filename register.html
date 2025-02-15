@@ -11,17 +11,10 @@
     <div class="container mt-2">
         <nav class="navbar navbar-expand-lg navbar-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">ASocial</a>
+            <a class="navbar-brand fw-bold" href="index.html">ASocial</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-              <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-              </ul>
-            </div>
           </div>
         </nav>
     </div>  
@@ -108,5 +101,97 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#genero").change(function () {
+                if ($(this).val() === "Otro") {
+                    if (!$("#generoOtro").length) {
+                        $(this).parent().append('<input type="text" id="generoOtro" class="form-control form-control-lg bg-dark text-white border-2 mt-2" placeholder="Especifica tu género">');
+                    }
+                } else {
+                    $("#generoOtro").remove();
+                }
+            });
+    
+            $("button[type='submit']").click(function (e) {
+                e.preventDefault();
+                let isValid = true;
+                let errorMessage = "Faltan los siguientes campos:\n";
+                
+                $(".form-control").removeClass("border-danger");
+    
+                let nombre = $("#nombre").val().trim();
+                let username = $("#username").val().trim();
+                let email = $("#email").val().trim();
+                let password = $("#password").val().trim();
+                let confirmPassword = $("#confirm-password").val().trim();
+                let genero = $("#genero").val();
+                let fechaNacimiento = $("#fecha-nacimiento").val();
+    
+                if (nombre === "") {
+                    $("#nombre").addClass("border-danger");
+                    errorMessage += "- Nombre\n";
+                    isValid = false;
+                }
+                if (username === "") {
+                    $("#username").addClass("border-danger");
+                    errorMessage += "- Username\n";
+                    isValid = false;
+                }
+                if (email === "" || !validateEmail(email)) {
+                    $("#email").addClass("border-danger");
+                    errorMessage += "- Email (Debe ser válido)\n";
+                    isValid = false;
+                }
+                if (password === "") {
+                    $("#password").addClass("border-danger");
+                    errorMessage += "- Contraseña\n";
+                    isValid = false;
+                }
+                if (confirmPassword === "" || password !== confirmPassword) {
+                    $("#confirm-password").addClass("border-danger");
+                    errorMessage += "- Confirmar contraseña (Debe coincidir con la contraseña)\n";
+                    isValid = false;
+                }
+                if (genero === null) {
+                    $("#genero").addClass("border-danger");
+                    errorMessage += "- Género\n";
+                    isValid = false;
+                }
+                if (fechaNacimiento === "" || !validateAge(fechaNacimiento)) {
+                    $("#fecha-nacimiento").addClass("border-danger");
+                    errorMessage += "- Fecha de nacimiento (Debe ser mayor de 18 años)\n";
+                    isValid = false;
+                }
+    
+                if (!isValid) {
+                    alert(errorMessage);
+                } else {
+                    alert("Registro exitoso");
+                    window.location.href = "login.html";
+                }
+            });
+    
+            function validateEmail(email) {
+                let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+    
+            function validateAge(fecha) {
+                let birthDate = new Date(fecha);
+                let today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                let monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age >= 18;
+            }
+        });
+    </script>
 </body>
 </html>

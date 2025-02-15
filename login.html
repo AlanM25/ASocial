@@ -11,17 +11,10 @@
   <div class="container mt-2">
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">ASocial</a>
+        <a class="navbar-brand fw-bold" href="index.html">ASocial</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-            </li>
-          </ul>
-        </div>
       </div>
     </nav>
   </div>  
@@ -37,12 +30,12 @@
               <p class="text-white-50 mb-5">Por favor ingresa tu username y tu contraseña!</p>
 
               <div class="form-outline form-white mb-4">
-                <input type="email" id="email" class="form-control form-control-lg bg-dark text-white border-2" />
-                <label class="form-label" for="email">Username</label>
+                <input type="text" id="username" class="form-control form-control-lg bg-dark text-white border-2" required/>
+                <label class="form-label" for="username">Username</label>
               </div>
 
               <div class="form-outline form-white mb-4">
-                <input type="password" id="password" class="form-control form-control-lg bg-dark text-white border-2" />
+                <input type="password" id="password" class="form-control form-control-lg bg-dark text-white border-2" required/>
                 <label class="form-label" for="password">Contraseña</label>
               </div>
 
@@ -51,7 +44,7 @@
                 <label class="form-check-label ms-2" for="checkbox"> Recordar contraseña </label>
               </div>
 
-              <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              <button class="btn btn-outline-light btn-lg px-5" type="submit" id="btnSubmit">Login</button>
 
             </div>
 
@@ -66,5 +59,22 @@
       </div>
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+  <script>
+    $btnSubmit = $('#btnSubmit');
+
+    $btnSubmit.on("click", function (e) {
+        let $username = $('#username').val().trim();
+        let $password = $("#password").val().trim();
+        if ($username === '' || $password === '') {
+            return;
+        }
+
+        e.preventDefault();
+        window.location.href = 'timeline.html';
+    });
+  </script>
 </body>
 </html>

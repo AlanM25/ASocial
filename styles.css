@@ -1,0 +1,46 @@
+.dropdown-item:hover, 
+.dropdown-item:focus {
+    background-color: #333 !important; /* Mantiene un tono oscuro al pasar el mouse */
+    color: white !important; /* Mantiene el texto blanco */
+}
+
+.left-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.description-box {
+    text-align: center;
+}
+
+.btn-primary {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+}
+
+.carousel img {
+    border-radius: 10px;
+    object-fit: cover;
+    height: 100%;
+}
+
+.carousel {
+    margin-left: 40px;
+    width: 100%;
+    max-height: 80vh;
+}
+
+.bg-dark-gray {
+    background-color: #333333; 
+}
